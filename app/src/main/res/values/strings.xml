@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">MoneyTracker</string>
     <string name="new_money_entry">New money entry</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="name_hint">Name</string>
+    <string name="dashboard_fragment">Dashboard</string>
+    <string name="categories_fragment">Categories</string>
+    <string name="history_fragment">History</string>
+    <string name="settings_fragment">Settings</string>
 </resources>
