@@ -6,8 +6,9 @@ import androidx.room.PrimaryKey;
 @Entity (tableName = "moneyrecords")
 public class MoneyRecord {
 
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     private long id;
+
     private String category;
     private double amount;
     private String description;
