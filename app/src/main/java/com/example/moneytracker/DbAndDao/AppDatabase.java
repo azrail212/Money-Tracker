@@ -13,8 +13,10 @@ import com.example.moneytracker.Entities.User;
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String dbName = "money_tracker_database";
+
     public abstract MoneyRecordDao moneyRecordDao();
     public abstract UserDao userDao();
+
     private static AppDatabase INSTANCE;
 
     public static AppDatabase getInstance(Context context){

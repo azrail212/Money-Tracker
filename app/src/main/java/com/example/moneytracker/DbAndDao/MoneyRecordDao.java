@@ -12,7 +12,7 @@ import java.util.List;
 public interface MoneyRecordDao {
 
     @Insert
-    void  add(MoneyRecord moneyRecord);
+    void add(MoneyRecord moneyRecord);
 
     @Query("SELECT * FROM moneyrecords")
     List<MoneyRecord> getAll();
