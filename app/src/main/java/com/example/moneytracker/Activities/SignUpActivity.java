@@ -40,7 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
             user.setUsername(username.getText().toString());
             user.setPassword(password.getText().toString());
 
-            if (validateInput(user)){
+            if (validateInput(user) == 0 ){ //0 code means all ok, -1 means problem
                 //Initialize database
                 AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
                 UserDao userDao = appDatabase.userDao();
@@ -65,15 +65,6 @@ public class SignUpActivity extends AppCompatActivity {
                 startActivity(signUpIntent);
                 Toast toast = Toast.makeText(getApplicationContext(), "Signup Successful!", Toast.LENGTH_SHORT);
                 toast.show();
-
-            }else {
-                Toast.makeText(getApplicationContext(),
-                        "Please make sure that you filled out " +
-                                "all the fields accordingly. " +
-                                "The password must be longer than 8 digits.",
-                        Toast.LENGTH_LONG).show();
-                resetInput();
-                password.setpri
             }
     }
 
@@ -83,13 +74,31 @@ public class SignUpActivity extends AppCompatActivity {
             startActivity(goBackToLoginIntent);
     }
 
-    private Boolean validateInput(User user){
-        if (user.getName().isEmpty() || user.getUsername().isEmpty()
-            || user.getPassword().length()<8 || user.getPassword().isEmpty()){
-            return false;
-        } return true;
+    private int validateInput(User user){
+        if (user.getName().isEmpty()) {
+            Toast.makeText(getApplicationContext(),
+                    "Please input your name. ",
+                    Toast.LENGTH_SHORT).show();
+            return -1;
+        } else if (user.getUsername().isEmpty()) {
+            Toast.makeText(getApplicationContext(),
+                    "Please input valid username. ",
+                    Toast.LENGTH_SHORT).show();
+            return -1;
+        } else if (user.getPassword().isEmpty()) {
+            Toast.makeText(getApplicationContext(),
+                    "Please input a password. ",
+                    Toast.LENGTH_SHORT).show();
+            return -1;
+        }else if (!isValidPassword(user.getPassword())) {
+            Toast.makeText(getApplicationContext(),
+                    "Password too simple. Must contain a minimum of 8 characters, at least one letter or number. ",
+                    Toast.LENGTH_LONG).show();
+            return -1;
+        }else return 0;  // 0 stands for OK
     }
 
+ /* unused method so far */
     private void resetInput(){
         name.getText().clear();
         username.getText().clear();
@@ -97,15 +106,15 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    /* public static boolean isValidPassword(final String password) {
+    public static boolean isValidPassword(final String password) {
 
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+        final String PASSWORD_PATTERN = "^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$"; //min 8 char, 1 letter, 1 number
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
 
         return matcher.matches();
 
-    }*/
+    }
 }
