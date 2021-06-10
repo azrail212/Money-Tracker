@@ -9,9 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.moneytracker.DbAndDao.AppDatabase;
+import com.example.moneytracker.DbAndDao.UserDao;
 import com.example.moneytracker.Entities.User;
 import com.example.moneytracker.R;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,15 +38,43 @@ public class SignUpActivity extends AppCompatActivity {
             User user = new User();
             user.setName(name.getText().toString());
             user.setUsername(username.getText().toString());
-            if (password.getText().toString().length() < 8 && !isValidPassword(password.getText().toString())) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Password too simple! Make sure you use a character, lowcase letter, capital letter and a number", Toast.LENGTH_LONG);
-                toast.show();
-            } else user.setPassword(password.getText().toString());
+            user.setPassword(password.getText().toString());
 
-            Intent signUpIntent = new Intent(this, MainActivity.class);
-            startActivity(signUpIntent);
-            Toast toast = Toast.makeText(getApplicationContext(), "Signup Successful! ", Toast.LENGTH_SHORT);
-            toast.show();
+            if (validateInput(user)){
+                //Initialize database
+                AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
+                UserDao userDao = appDatabase.userDao();
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //call the register aka. add method
+                        userDao.add(user);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(),
+                                        "Signup Successful! ",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).start();
+
+                Intent signUpIntent = new Intent(this, MainActivity.class);
+                startActivity(signUpIntent);
+                Toast toast = Toast.makeText(getApplicationContext(), "Signup Successful!", Toast.LENGTH_SHORT);
+                toast.show();
+
+            }else {
+                Toast.makeText(getApplicationContext(),
+                        "Please make sure that you filled out " +
+                                "all the fields accordingly. " +
+                                "The password must be longer than 8 digits.",
+                        Toast.LENGTH_LONG).show();
+                resetInput();
+                password.setpri
+            }
     }
 
 
@@ -52,8 +83,21 @@ public class SignUpActivity extends AppCompatActivity {
             startActivity(goBackToLoginIntent);
     }
 
+    private Boolean validateInput(User user){
+        if (user.getName().isEmpty() || user.getUsername().isEmpty()
+            || user.getPassword().length()<8 || user.getPassword().isEmpty()){
+            return false;
+        } return true;
+    }
 
-    public static boolean isValidPassword(final String password) {
+    private void resetInput(){
+        name.getText().clear();
+        username.getText().clear();
+        password.getText().clear();
+    }
+
+
+    /* public static boolean isValidPassword(final String password) {
 
         Pattern pattern;
         Matcher matcher;
@@ -63,5 +107,5 @@ public class SignUpActivity extends AppCompatActivity {
 
         return matcher.matches();
 
-    }
+    }*/
 }
