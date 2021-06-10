@@ -20,6 +20,9 @@ import com.example.moneytracker.Fragments.ViewPageAdapter;
 import com.example.moneytracker.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
@@ -85,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-
 
     public void onAddNewEntry(View view){
 

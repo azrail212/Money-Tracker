@@ -12,13 +12,13 @@ import java.util.List;
 public interface MoneyRecordDao {
 
     @Insert
-    void  add(MoneyRecord moneyRecord);
+    void add(MoneyRecord moneyRecord);
 
     @Query("SELECT * FROM moneyrecords")
     List<MoneyRecord> getAll();
 
-    @Query("SELECT * FROM moneyrecords WHERE id=:id LIMIT 1")
-    MoneyRecord getMoneyRecordById(long id);
+    /*@Query("SELECT * FROM moneyrecords WHERE id=:id LIMIT 1")
+    MoneyRecord getMoneyRecordById(long id);*/
 
     @Query("UPDATE moneyrecords SET category=:category, amount=:amount, description=:description WHERE id=:id")
     void update(long id, String category, double amount, String description);
