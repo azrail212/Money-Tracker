@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 public class SignUpActivity extends AppCompatActivity {
 
     private EditText name, username, password;
-    private Button signup, signupCancel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void onCreateAccountClick(View view) {
             //Intitialize user entity
             User user = new User();
+
             user.setName(name.getText().toString());
             user.setUsername(username.getText().toString());
             user.setPassword(password.getText().toString());
@@ -44,10 +45,8 @@ public class SignUpActivity extends AppCompatActivity {
                 //Initialize database
                 AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
                 UserDao userDao = appDatabase.userDao();
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
+                if (userDao.getUserByUserName(username.getText().toString()) == null) {
+                    new Thread(() -> {
                         //call the register aka. add method
                         userDao.add(user);
                         runOnUiThread(new Runnable() {
@@ -58,13 +57,19 @@ public class SignUpActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                             }
                         });
-                    }
-                }).start();
+                    }).start();
 
-                Intent signUpIntent = new Intent(this, MainActivity.class);
-                startActivity(signUpIntent);
-                Toast toast = Toast.makeText(getApplicationContext(), "Signup Successful!", Toast.LENGTH_SHORT);
-                toast.show();
+                    Intent signUpReturnUserToLoginIntent = new Intent(this, LoginActivity.class);
+                    startActivity(signUpReturnUserToLoginIntent);
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "Signup Successful!", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                }else {
+                    Toast.makeText(getApplicationContext(),
+                            "A user with username "+ username.getText().toString()+ " already exists on this phone. ",
+                            Toast.LENGTH_LONG).show();
+                }
             }
     }
 
