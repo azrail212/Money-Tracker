@@ -25,4 +25,8 @@ public interface MoneyRecordDao {
 
     @Query("DELETE FROM moneyrecords WHERE id=:id")
     void delete(long id);
+
+
+    @Query("SELECT * FROM moneyrecords WHERE category=:category")
+    List<MoneyRecord> getAllFromCategory(String category);
 }
