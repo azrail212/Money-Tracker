@@ -21,7 +21,14 @@
         android:theme="@style/Theme.MoneyTracker">
         <activity android:name=".Activities.ChangeUsernameActivity"></activity>
         <activity android:name=".Activities.ChangePasswordActivity" />
-        <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.CategoryDetailActivity"
+            android:parentActivityName=".Activities.MainActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".Activities.NewCategoryActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
+        <activity android:name=".Activities.MainActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".Activities.SignUpActivity"
             android:parentActivityName=".Activities.LoginActivity" />

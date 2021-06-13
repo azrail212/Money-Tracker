@@ -1,7 +1,6 @@
 package com.example.moneytracker.Activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -17,16 +16,19 @@ import com.example.moneytracker.DbAndDao.UserDao;
 import com.example.moneytracker.Entities.User;
 import com.example.moneytracker.Fragments.DashboardFragment;
 import com.example.moneytracker.Fragments.HistoryFragment;
-import com.example.moneytracker.Fragments.ManageCategoriesFragment;
+import com.example.moneytracker.Fragments.CategoriesFragment;
 import com.example.moneytracker.Fragments.SettingsFragment;
 import com.example.moneytracker.Fragments.ViewPageAdapter;
 import com.example.moneytracker.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class MainActivity extends AppCompatActivity {
+    public static final String[] TYPES = new String[] {"Income", "Expense"};
 
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private void setUpAdapter(ViewPager viewPager){
         ViewPageAdapter viewPageAdapter= new ViewPageAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPageAdapter.addFragment(new DashboardFragment());
-        viewPageAdapter.addFragment(new ManageCategoriesFragment());
+        viewPageAdapter.addFragment(new CategoriesFragment());
         viewPageAdapter.addFragment(new HistoryFragment());
         viewPageAdapter.addFragment(new SettingsFragment());
         viewPager.setAdapter(viewPageAdapter);
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
 
     public void onAddNewEntry(View view){
         Intent intent = new Intent(this, NewEntryActivity.class);
