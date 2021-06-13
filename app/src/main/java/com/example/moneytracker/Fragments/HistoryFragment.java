@@ -101,6 +101,9 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemSelec
         totalIncome.setText(Double.toString(helper.getSelectedIncome(selectedMonth)));
         totalExpenses.setText(Double.toString(helper.getSelectedExpenses(selectedMonth)));
         balance.setText(df.format(helper.getSelectedBalance(selectedMonth)));
+        Log.i("month", Integer.toString(selectedMonth));
+        Log.i("income", Double.toString(helper.getSelectedExpenses(selectedMonth)));
+        Log.i("expenses", Double.toString(helper.getSelectedExpenses(selectedMonth)));
     }
 
     @Override
@@ -113,6 +116,13 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemSelec
         MoneyRecordAdapter adapter = new MoneyRecordAdapter(context, helper.getMoneyRecordsForSelectedMonth(selectedMonth));
         adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpMoneyRecordAdapter();
     }
 
 }
