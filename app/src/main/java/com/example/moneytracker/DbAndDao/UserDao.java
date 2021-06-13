@@ -22,13 +22,22 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE username=:username AND password = :password")
     User loginUser(String username, String password);
 
+    @Query("UPDATE users SET isLoggedIn = :isLoggedIn WHERE id=:id")
+    void logoutUser(boolean isLoggedIn, long id);
+
     @Query("SELECT * FROM users WHERE username=:username LIMIT 1")
     User getUserByUserName(String username);
 
     @Query("UPDATE users SET name=:name, username=:username, password=:password WHERE id=:id")
     void update(long id, String name, String username, String password);
 
-    @Query("DELETE FROM users WHERE id=:id")
-    void delete(long id);
+    @Query("UPDATE users SET password=:password WHERE username=:username")
+    void changePassword(String password, String username);
+
+    @Query("UPDATE users SET username=:newUsername WHERE username=:username")
+    void changeUsername(String newUsername, String username);
+
+    @Query("DELETE FROM users WHERE username=:username")
+    void delete(String username);
 }
 

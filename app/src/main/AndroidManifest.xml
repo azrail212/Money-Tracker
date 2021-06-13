@@ -2,13 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.moneytracker">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.GET_CONTENT" />
+
+            <data android:mimeType="image/*" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/money_tracker_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyTracker">
+        <activity android:name=".Activities.ChangeUsernameActivity"></activity>
+        <activity android:name=".Activities.ChangePasswordActivity" />
         <activity android:name=".Activities.CategoryDetailActivity"
             android:parentActivityName=".Activities.MainActivity"
             android:launchMode="singleTop"/>

@@ -19,15 +19,14 @@ public interface MoneyRecordDao {
     @Query("SELECT * FROM moneyrecords")
     List<MoneyRecord> getAll();
 
-    /*@Query("SELECT * FROM moneyrecords WHERE id=:id LIMIT 1")
-    MoneyRecord getMoneyRecordById(long id);*/
+    @Query("SELECT * FROM moneyrecords WHERE id=:id LIMIT 1")
+    MoneyRecord getMoneyRecordById(long id);
 
     @Query("UPDATE moneyrecords SET date=:date, type=:type, category=:category, amount=:amount, description=:description WHERE id=:id")
     void update(long id, Calendar date, String type, String category, double amount, String description);
 
     @Query("DELETE FROM moneyrecords WHERE id=:id")
     void delete(long id);
-
 
     @Query("SELECT * FROM moneyrecords WHERE category=:category")
     List<MoneyRecord> getAllFromCategory(String category);

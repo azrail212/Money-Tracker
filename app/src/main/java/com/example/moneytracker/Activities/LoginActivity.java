@@ -16,7 +16,8 @@ import com.example.moneytracker.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText username, password;
+    public static EditText username;
+    private EditText password;
 
 
     @Override
@@ -39,27 +40,19 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
             UserDao userDao = appDatabase.userDao();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    User user = userDao.loginUser(userNameText, passwordText);
-                    if (user == null) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getApplicationContext(),
-                                        "Invalid credentials.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }else{
-                        Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(loginIntent);
-                    }
+            new Thread(() -> {
+                User user = userDao.loginUser(userNameText, passwordText);
+                if (user == null) {
+                    runOnUiThread(() -> Toast.makeText(getApplicationContext(),
+                            "Invalid credentials.", Toast.LENGTH_SHORT).show());
+                }else{
+                    Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(loginIntent);
+                    finish();
                 }
             }).start();
         }
         }
-
 
     private int validateInput(User user){
         String userNameText= username.getText().toString();
@@ -72,10 +65,9 @@ public class LoginActivity extends AppCompatActivity {
         return 0;
     }
 
-
-
     public void onSignUpButtonClick(View view){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
+        finish();
     }
 }

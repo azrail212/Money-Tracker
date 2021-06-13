@@ -20,7 +20,8 @@ import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private EditText name, username, password;
+    public static EditText name;
+    private EditText username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void onCreateAccountClick(View view) {
             //Intitialize user entity
-            User user = new User();
-
-            user.setName(name.getText().toString());
-            user.setUsername(username.getText().toString());
-            user.setPassword(password.getText().toString());
+            User user = new User(name.getText().toString(), username.getText().toString(), password.getText().toString(), false);
 
             if (validateInput(user) == 0 ){ //0 code means all ok, -1 means problem
                 //Initialize database
@@ -61,6 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                     Intent signUpReturnUserToLoginIntent = new Intent(this, LoginActivity.class);
                     startActivity(signUpReturnUserToLoginIntent);
+                    finish();
 
                     Toast toast = Toast.makeText(getApplicationContext(), "Signup Successful!", Toast.LENGTH_SHORT);
                     toast.show();
@@ -77,6 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void onCancelSignupClick(View view) {
             Intent goBackToLoginIntent = new Intent(this, LoginActivity.class);
             startActivity(goBackToLoginIntent);
+            finish();
     }
 
     private int validateInput(User user){
@@ -102,14 +101,6 @@ public class SignUpActivity extends AppCompatActivity {
             return -1;
         }else return 0;  // 0 stands for OK
     }
-
- /* unused method so far */
-    private void resetInput(){
-        name.getText().clear();
-        username.getText().clear();
-        password.getText().clear();
-    }
-
 
     public static boolean isValidPassword(final String password) {
 

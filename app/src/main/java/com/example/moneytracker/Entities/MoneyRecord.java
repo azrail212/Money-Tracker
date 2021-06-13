@@ -16,6 +16,7 @@ public class MoneyRecord {
     private String category;
     private double amount;
     private String description;
+    private String username;
 
     public MoneyRecord(String type, Calendar date, String category, double amount, String description) {
         this.type = type;
@@ -23,6 +24,14 @@ public class MoneyRecord {
         this.category = category;
         this.amount = amount;
         this.description = description;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public long getId() {
