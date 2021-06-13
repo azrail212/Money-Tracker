@@ -16,8 +16,8 @@ import com.example.moneytracker.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final int MAIN_ACTIVITY_REQUEST_CODE = 1;
-    private EditText username, password;
+    public static EditText username;
+    private EditText password;
 
 
     @Override
@@ -40,46 +40,19 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
             UserDao userDao = appDatabase.userDao();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    User user = userDao.loginUser(userNameText, passwordText);
-                    if (user == null) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getApplicationContext(),
-                                        "Invalid credentials.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }else{
-                        Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(loginIntent);
-                    }
+            new Thread(() -> {
+                User user = userDao.loginUser(userNameText, passwordText);
+                if (user == null) {
+                    runOnUiThread(() -> Toast.makeText(getApplicationContext(),
+                            "Invalid credentials.", Toast.LENGTH_SHORT).show());
+                }else{
+                    Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(loginIntent);
+                    finish();
                 }
             }).start();
         }
         }
-        
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MAIN_ACTIVITY_REQUEST_CODE) {
-
-            if (!MainActivity.AppState.getSingleInstance().isLoggingOut()) {
-                finish();
-            } else {
-                MainActivity.AppState.getSingleInstance().setLoggingOut(false);
-                super.onActivityResult(requestCode, resultCode, data);
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-
-    }
 
     private int validateInput(User user){
         String userNameText= username.getText().toString();
@@ -92,10 +65,9 @@ public class LoginActivity extends AppCompatActivity {
         return 0;
     }
 
-
-
     public void onSignUpButtonClick(View view){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
+        finish();
     }
 }

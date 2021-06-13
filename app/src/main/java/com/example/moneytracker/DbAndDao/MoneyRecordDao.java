@@ -23,6 +23,6 @@ public interface MoneyRecordDao {
     @Query("UPDATE moneyrecords SET category=:category, amount=:amount, description=:description WHERE id=:id")
     void update(String category, double amount, String description, long id);
 
-    @Query("DELETE FROM moneyrecords WHERE id=:id")
-    void delete(long id);
+    @Query("DELETE FROM moneyrecords WHERE username=:username")
+    void delete(String username);
 }

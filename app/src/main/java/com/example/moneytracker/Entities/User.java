@@ -14,6 +14,13 @@ public class User {
     private String password;
     private boolean isLoggedIn;
 
+    public User(String name, String username, String password, boolean isLoggedIn) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.isLoggedIn = isLoggedIn;
+    }
+
     public boolean isLoggedIn() {
         return isLoggedIn;
     }

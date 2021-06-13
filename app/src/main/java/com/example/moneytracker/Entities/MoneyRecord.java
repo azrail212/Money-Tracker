@@ -12,11 +12,20 @@ public class MoneyRecord {
     private String category;
     private double amount;
     private String description;
+    private String username;
 
     public MoneyRecord(String category, Double amount, String description) {
         this.category = category;
         this.amount = amount;
         this.description = description;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public long getId() {

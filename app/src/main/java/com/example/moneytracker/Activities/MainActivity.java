@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.moneytracker.DbAndDao.AppDatabase;
+import com.example.moneytracker.DbAndDao.UserDao;
+import com.example.moneytracker.Entities.User;
 import com.example.moneytracker.Fragments.DashboardFragment;
 import com.example.moneytracker.Fragments.HistoryFragment;
 import com.example.moneytracker.Fragments.ManageCategoriesFragment;
@@ -28,10 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         bottomNavigationView=findViewById(R.id.bottom_navigation_bar);
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
@@ -46,12 +52,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 bottomNavigationView.getMenu().getItem(position).setChecked(true);
-
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
         setUpAdapter(viewPager);
@@ -90,32 +94,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void onAddNewEntry(View view){
-
         Intent intent = new Intent(this, NewEntryActivity.class);
         startActivity(intent);
-    }
-
-    public static class AppState {
-        private static AppState singleInstance;
-
-        private boolean isLoggingOut;
-
-        private AppState() {
-        }
-
-        public static AppState getSingleInstance() {
-            if (singleInstance == null) {
-                singleInstance = new AppState();
-            }
-            return singleInstance;
-        }
-
-        public boolean isLoggingOut() {
-            return isLoggingOut;
-        }
-
-        public void setLoggingOut(boolean isLoggingOut) {
-            this.isLoggingOut = isLoggingOut;
-        }
     }
 }

@@ -128,7 +128,8 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/money_tracker_logo"
+        tools:srcCompat="@drawable/money_tracker_logo" />
 
     <TextView
         android:id="@+id/textView5"
@@ -159,7 +160,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view1" />
 
     <TextView
-        android:id="@+id/name_textview"
+        android:id="@+id/settings_name_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -167,7 +168,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view2"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -206,7 +206,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
-        android:id="@+id/username_textview"
+        android:id="@+id/settings_username_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -214,10 +214,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view2"
-        app:layout_constraintTop_toBottomOf="@+id/name_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_name_textview" />
 
     <Button
         android:id="@+id/delete_account_button"
