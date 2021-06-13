@@ -20,6 +20,9 @@ import com.example.moneytracker.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class MainActivity extends AppCompatActivity {
     public static final String[] TYPES = new String[] {"Income", "Expense"};
@@ -88,4 +91,10 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
+    public void onAddNewEntry(View view){
+
+        Intent intent = new Intent(this, NewEntryActivity.class);
+        startActivity(intent);
+    }
 }
