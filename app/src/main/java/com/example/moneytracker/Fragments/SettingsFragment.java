@@ -87,7 +87,7 @@ public class SettingsFragment extends Fragment {
 
             new Thread(() -> {
                 userDao.delete(LoginActivity.username.getText().toString());
-                moneyRecordDao.delete(LoginActivity.username.getText().toString());
+
             }).start();
 
             Intent deleteIntent = new Intent(SettingsFragment.this.getActivity().getApplicationContext(), SignUpActivity.class);

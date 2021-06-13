@@ -8,10 +8,10 @@
     <Button
         android:id="@+id/change_username_button"
         android:layout_width="240dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Change username"
@@ -22,10 +22,10 @@
     <TextView
         android:id="@+id/textView14"
         android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Don't like what you see ?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view1" />
@@ -33,10 +33,10 @@
     <Button
         android:id="@+id/change_password_button"
         android:layout_width="240dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Change password"
@@ -47,10 +47,10 @@
     <TextView
         android:id="@+id/textView6"
         android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Worried about security?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view4" />
@@ -59,27 +59,10 @@
         android:id="@+id/view5"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@+id/change_username_button"
         tools:layout_editor_absoluteX="0dp" />
-
-    <View
-        android:id="@+id/view8"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@+id/button8" />
-
-    <View
-        android:id="@+id/view9"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        tools:layout_editor_absoluteX="-16dp" />
 
     <View
         android:id="@+id/view1"
@@ -93,10 +76,10 @@
     <TextView
         android:id="@+id/textView7"
         android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Got your name wrong?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -105,7 +88,7 @@
         android:id="@+id/view4"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@+id/change_profile_picture_button"
         tools:layout_editor_absoluteX="-2dp" />
@@ -114,7 +97,7 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@+id/change_password_button"
         tools:layout_editor_absoluteX="16dp" />
@@ -148,10 +131,10 @@
     <Button
         android:id="@+id/change_profile_picture_button"
         android:layout_width="240dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Change profile picture"
@@ -221,10 +204,10 @@
     <Button
         android:id="@+id/delete_account_button"
         android:layout_width="240dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Delete account &amp; Data"
@@ -235,19 +218,19 @@
     <TextView
         android:id="@+id/textView16"
         android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Won't be using us for a while?"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view8" />
+        app:layout_constraintTop_toBottomOf="@+id/view5" />
 
     <View
         android:id="@+id/view6"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
         tools:layout_editor_absoluteX="1dp" />
@@ -264,10 +247,10 @@
     <TextView
         android:id="@+id/textView17"
         android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:text="Money really bores you?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view6" />
@@ -275,65 +258,15 @@
     <Button
         android:id="@+id/logout_button"
         android:layout_width="240dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/view8" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:text="App currency:"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view5" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="240dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Change currency"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Wan't to change things up?"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view9" />
-
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="240dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Change app colors"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/view9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
