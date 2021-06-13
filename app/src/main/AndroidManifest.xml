@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyTracker">
-        <activity android:name=".Activities.MainActivity"></activity>
+        <activity android:name=".Activities.CategoryDetailActivity"
+            android:parentActivityName=".Activities.MainActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".Activities.NewCategoryActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
+        <activity android:name=".Activities.MainActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".Activities.SignUpActivity"
             android:parentActivityName=".Activities.LoginActivity" />

@@ -19,19 +19,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/category_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Category"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <EditText
         android:id="@+id/amount_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,9 +27,57 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Amount"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/type_input" />
+
+    <Button
+        android:id="@+id/save_new_entry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:onClick="onSave"
+        android:text="Save"
+        app:layout_constraintStart_toEndOf="@+id/delete_entry_button"
+        app:layout_constraintTop_toBottomOf="@+id/description_input" />
+
+    <EditText
+        android:id="@+id/date_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Date"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/category_input" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Spinner
+        android:id="@+id/type_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="@+id/date_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_input" />
+
+    <Spinner
+        android:id="@+id/category_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/amount_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amount_input" />
 
     <EditText
         android:id="@+id/description_input"
@@ -52,19 +87,34 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:gravity="start|top"
         android:hint="Description"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amount_input" />
+        app:layout_constraintTop_toBottomOf="@+id/category_input" />
 
     <Button
-        android:id="@+id/add_button"
+        android:id="@+id/cancel_new_entry_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:text="Add"
+        android:layout_marginTop="16dp"
+        android:onClick="onCancel"
+        android:text="Cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description_input" />
+
+    <Button
+        android:id="@+id/delete_entry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:onClick="onDelete"
+        android:text="Delete"
+        app:layout_constraintStart_toEndOf="@+id/cancel_new_entry_button"
+        app:layout_constraintTop_toBottomOf="@+id/description_input" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
