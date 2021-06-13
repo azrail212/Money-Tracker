@@ -21,32 +21,41 @@
         android:theme="@style/Theme.MoneyTracker">
         <activity android:name=".Activities.ChangeNameActivity"
             android:theme="@style/Theme.AppCompat.DayNight.Dialog"></activity>
+
         <activity android:name=".Activities.AreYouSureActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.Dialog"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"
+            android:noHistory="true"></activity>
 
         <activity android:name=".Activities.ChangePasswordActivity"
             android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
+
         <activity android:name=".Activities.CategoryDetailActivity"
             android:parentActivityName=".Activities.MainActivity"
             android:launchMode="singleTop"/>
+
         <activity
             android:name=".Activities.NewCategoryActivity"
             android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
+
         <activity android:name=".Activities.MainActivity"
             android:launchMode="singleTop"/>
+
         <activity
-            android:name=".Activities.SignUpActivity"
-            android:parentActivityName=".Activities.LoginActivity" />
-        <activity android:name=".Activities.LoginActivity">
+            android:name=".Activities.SignUpActivity" />
+
+        <activity android:name=".Activities.LoginActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Activities.NewEntryActivity"
             android:parentActivityName=".Activities.MainActivity" />
+
     </application>
 
 </manifest>
