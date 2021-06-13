@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -17,14 +18,17 @@ import com.example.moneytracker.Entities.Category;
 import com.example.moneytracker.Entities.MoneyRecord;
 import com.example.moneytracker.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CategoryDetailActivity extends AppCompatActivity {
     public static final String EXTRA_CATEGORY_ID = "CategoryDetailActivity/EXTRA_CATEGORY_ID";
-    public static final String EXTRA_TODO_ID = "CategoryDetailActivity/EXTRA_TODO_ID";
+    public static final String EXTRA_MONEY_RECORD_ID = "CategoryDetailActivity/EXTRA_MONEY_RECORD_ID";
 
-    TextView categoryName;
+    TextView categoryName, totalIncome, totalExpenses, balance;
     ListView listView;
     long id = 0;
 
@@ -34,9 +38,11 @@ public class CategoryDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category_detail);
 
         categoryName = (TextView) findViewById(R.id.category_detail_name);
+        totalIncome = (TextView) findViewById(R.id.category_detail_income);
+        totalExpenses = (TextView) findViewById(R.id.category_detail_expenses);
+        balance = (TextView) findViewById(R.id.category_detail_balance);
         listView = (ListView) findViewById(R.id.category_detail_list);
         setUpCategoryDetailAdapter();
-
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -45,6 +51,11 @@ public class CategoryDetailActivity extends AppCompatActivity {
             categoryName.setText(category.getCategoryName());
             id = category.getId();
         }
+
+        totalIncome.setText(Double.toString(getTotalIncome()));
+        totalExpenses.setText(Double.toString(getTotalExpenses()));
+        DecimalFormat df = new DecimalFormat("0.00");
+        balance.setText(df.format(getBalance()));
 
 
         categoryName.setOnLongClickListener(new View.OnLongClickListener() {
@@ -66,7 +77,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long itemId = parent.getItemIdAtPosition(position);
                 Intent intent = new Intent(CategoryDetailActivity.this, NewEntryActivity.class);
-                intent.putExtra(EXTRA_TODO_ID, itemId);
+                intent.putExtra(EXTRA_MONEY_RECORD_ID, itemId);
                 startActivity(intent);
             }
         });
@@ -74,25 +85,55 @@ public class CategoryDetailActivity extends AppCompatActivity {
 
 
     private void setUpCategoryDetailAdapter(){
+        CategoryDetailAdapter adapter = new CategoryDetailAdapter(this, getMoneyRecordList());
+        adapter.notifyDataSetChanged();
+        listView.setAdapter(adapter);
+    }
+
+
+    public  List<MoneyRecord> getMoneyRecordList() {
         List<MoneyRecord> moneyRecords = new ArrayList<>();
-        moneyRecords.add(new MoneyRecord("INCOME", "", 50, "Tutoring" ));
-        moneyRecords.add(new MoneyRecord("EXPENSE", "Groceries", 10.5, "Groceries" ));
-        /*if(categoryName.getText().toString().equals("All"))
+        if(categoryName.getText().toString().equals("All"))
             moneyRecords = AppDatabase.getInstance(this).moneyRecordDao().getAll();
         else if(categoryName.getText().toString().equals("Uncategorized"))
             moneyRecords = AppDatabase.getInstance(this).moneyRecordDao().getAllFromCategory("");
         else
-            moneyRecords = AppDatabase.getInstance(this).moneyRecordDao().getAllFromCategory(categoryName.getText().toString());*/
+            moneyRecords = AppDatabase.getInstance(this).moneyRecordDao().getAllFromCategory(categoryName.getText().toString());
 
-        CategoryDetailAdapter adapter = new CategoryDetailAdapter(this, moneyRecords);
-        adapter.notifyDataSetChanged();
-        listView.setAdapter(adapter);
+        return moneyRecords;
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
+        Category category = AppDatabase.getInstance(this).categoryDao().getCategoryById(id);
+        categoryName.setText(category.getCategoryName());
         setUpCategoryDetailAdapter();
+    }
+
+
+    public double getTotalIncome(){
+        double income = 0;
+        List<MoneyRecord> moneyRecords = getMoneyRecordList();
+        for(MoneyRecord mr : moneyRecords){
+            if(mr.getType().equals("Income"))
+                income += mr.getAmount();
+        }
+        return income;
+    }
+
+    public double getTotalExpenses(){
+        double expenses = 0;
+        List<MoneyRecord> moneyRecords = getMoneyRecordList();
+        for(MoneyRecord mr : moneyRecords){
+            if(mr.getType().equals("Expense"))
+                expenses += mr.getAmount();
+        }
+        return expenses;
+    }
+
+    public double getBalance(){
+        return getTotalIncome() - getTotalExpenses();
     }
 }

@@ -30,4 +30,7 @@ public interface CategoryDao {
 
     @Query("SELECT * FROM categories WHERE categoryName=:categoryName LIMIT 1")
     Category getCategoryByName(String categoryName);
+
+    @Query("SELECT * FROM categories WHERE categoryName <> 'All' AND categoryName <> 'Uncategorized'")
+    List<Category> getPickableCategories();
 }

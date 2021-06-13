@@ -3,22 +3,23 @@ package com.example.moneytracker.Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity (tableName = "moneyrecords")
 public class MoneyRecord {
 
-    @PrimaryKey (autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String type;
-    //private Date date;
+    private Calendar date;
     private String category;
     private double amount;
     private String description;
 
-    public MoneyRecord(String type, /*Date date,*/ String category, double amount, String description) {
+    public MoneyRecord(String type, Calendar date, String category, double amount, String description) {
         this.type = type;
-        //this.date = date;
+        this.date = date;
         this.category = category;
         this.amount = amount;
         this.description = description;
@@ -40,13 +41,13 @@ public class MoneyRecord {
         this.type = type;
     }
 
-    /*public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Calendar date) {
         this.date = date;
-    }*/
+    }
 
     public String getCategory() {
         return category;

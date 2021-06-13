@@ -19,7 +19,10 @@ import com.example.moneytracker.Fragments.ViewPageAdapter;
 import com.example.moneytracker.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+    public static final String[] TYPES = new String[] {"Income", "Expense"};
 
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;

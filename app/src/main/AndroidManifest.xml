@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyTracker">
         <activity android:name=".Activities.CategoryDetailActivity"
-            android:parentActivityName=".Activities.MainActivity" />
+            android:parentActivityName=".Activities.MainActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".Activities.NewCategoryActivity"
             android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
