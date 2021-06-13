@@ -179,8 +179,9 @@ public class NewEntryActivity extends AppCompatActivity
     }
 
 
-    public void onCancel(View view){
-        finish();
+    public void onCancel(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 
@@ -189,7 +190,6 @@ public class NewEntryActivity extends AppCompatActivity
             if(id != 0){
                 AppDatabase.getInstance(this).moneyRecordDao().update(id, date, type, category,
                         Double.parseDouble(amountInput.getText().toString()), descriptionInput.getText().toString());
-                Log.i("update", date.toString());
             }
             else {
                 MoneyRecord moneyRecord = new MoneyRecord(type, date, category,

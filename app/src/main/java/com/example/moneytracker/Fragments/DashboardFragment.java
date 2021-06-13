@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ import java.util.Locale;
 
 public class DashboardFragment extends Fragment {
     private Context context;
-    private TextView currentDate, currrenIncome, currentExpenses, currentBalance,
+    private TextView currentDate, currentIncome, currentExpenses, currentBalance,
                 annualIncome, annualExpenses, annualBalance;
     private Button addNewEntry;
 
@@ -47,7 +48,7 @@ public class DashboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dashboard,container,false);
 
         currentDate = (TextView) view.findViewById(R.id.current_date);
-        currrenIncome = (TextView) view.findViewById(R.id.current_income);
+        currentIncome = (TextView) view.findViewById(R.id.current_income);
         currentExpenses = (TextView) view.findViewById(R.id.current_expenses);
         currentBalance = (TextView) view.findViewById(R.id.current_balance);
         annualIncome = (TextView) view.findViewById(R.id.annual_income);
@@ -56,7 +57,7 @@ public class DashboardFragment extends Fragment {
 
         currentDate.setText(helper.getCurrentDate());
         DecimalFormat df = new DecimalFormat("0.00");
-        currrenIncome.setText(Double.toString(helper.getCurrentIncome()));
+        currentIncome.setText(Double.toString(helper.getCurrentIncome()));
         currentExpenses.setText(Double.toString(helper.getCurrentExpenses()));
         currentBalance.setText(df.format(helper.getCurrentBalance()));
         annualIncome.setText(Double.toString(helper.getAnnualIncome()));
@@ -74,74 +75,4 @@ public class DashboardFragment extends Fragment {
 
         return view;
     }
-
-
-   /* public String getCurrentDate(){
-        Calendar date = Calendar.getInstance();
-        date.set(Calendar.MONTH, date.get(Calendar.MONTH));
-        return date.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH) + " " + date.get(Calendar.YEAR);
-    }
-
-
-    public double getCurrentIncome(){
-        List<MoneyRecord> moneyRecords = getMoneyRecordsForCurrentMonth();
-        return getIncomeSum(moneyRecords);
-    }
-
-    public double getCurrentExpenses(){
-        List<MoneyRecord> moneyRecords = getMoneyRecordsForCurrentMonth();
-        return getExpensesSum(moneyRecords);
-    }
-
-    public double getCurrentBalance(){
-        return getCurrentIncome() - getCurrentExpenses();
-    }
-
-
-    public double getAnnualIncome(){
-        List<MoneyRecord> moneyRecords = AppDatabase.getInstance(context).moneyRecordDao().getAll();
-        return getIncomeSum(moneyRecords);
-    }
-
-    public double getAnnualExpenses(){
-        List<MoneyRecord> moneyRecords = AppDatabase.getInstance(context).moneyRecordDao().getAll();
-        return getExpensesSum(moneyRecords);
-    }
-
-    public double getAnnualBalance(){
-        return getAnnualIncome() - getAnnualExpenses();
-    }
-
-
-    public List<MoneyRecord> getMoneyRecordsForCurrentMonth(){
-        Calendar date1 = Calendar.getInstance();
-        Calendar date2 = Calendar.getInstance();
-
-        date1.set(Calendar.MONTH, date1.get(Calendar.MONTH) + 1);
-        date1.set(Calendar.DAY_OF_MONTH, 1);
-
-        date2.set(Calendar.MONTH, date2.get(Calendar.MONTH) + 1);
-        date2.set(Calendar.DAY_OF_MONTH, date2.getActualMaximum(Calendar.DATE));
-
-        List<MoneyRecord> moneyRecords = AppDatabase.getInstance(context).moneyRecordDao().getAllFromSpecificPeriod(date1, date2);
-        return moneyRecords;
-    }
-
-    public double getIncomeSum(List<MoneyRecord> moneyRecords){
-        double income = 0;
-        for(MoneyRecord mr : moneyRecords) {
-            if(mr.getType().equals("Income"))
-                income += mr.getAmount();
-        }
-        return income;
-    }
-
-    public double getExpensesSum(List<MoneyRecord> moneyRecords){
-        double expenses = 0;
-        for(MoneyRecord mr : moneyRecords){
-            if(mr.getType().equals("Expense"))
-                expenses += mr.getAmount();
-        }
-        return expenses;
-    }*/
 }
