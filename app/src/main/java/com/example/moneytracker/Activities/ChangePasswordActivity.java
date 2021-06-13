@@ -55,7 +55,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }else {
             AppDatabase.getInstance(this).userDao().changePassword(newPasswordText, user.getUsername());
 
-            Intent saveNewPasswordIntent = new Intent(ChangePasswordActivity.this, MainActivity.class);
+            Intent saveNewPasswordIntent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
             startActivity(saveNewPasswordIntent);
             finish();
         }
