@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
@@ -32,13 +33,13 @@ import java.util.List;
 public class NewEntryActivity extends AppCompatActivity
         implements DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener
 {
-    EditText dateInput, amountInput, descriptionInput;
-    Spinner typeInput, categoryInput;
-    Calendar date = Calendar.getInstance();
-    String type = "";
-    String category = "";
-    Button deleteButton;
-    long id = 0;
+    private EditText dateInput, amountInput, descriptionInput;
+    private Spinner typeInput, categoryInput;
+    private Calendar date = Calendar.getInstance();
+    private String type = "";
+    private String category = "";
+    private Button deleteButton;
+    private long id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,7 @@ public class NewEntryActivity extends AppCompatActivity
             id = extras.getLong(CategoryDetailActivity.EXTRA_MONEY_RECORD_ID);
             MoneyRecord moneyRecord = AppDatabase.getInstance(this).moneyRecordDao().getMoneyRecordById(id);
             date = moneyRecord.getDate();
+            Log.i("got", date.toString());
             dateInput.setText(Integer.toString(date.get(Calendar.DAY_OF_MONTH))+"."+
                     Integer.toString(date.get(Calendar.MONTH))+"."+
                     Integer.toString(date.get(Calendar.YEAR)));
@@ -137,11 +139,11 @@ public class NewEntryActivity extends AppCompatActivity
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         date.set(year, (month + 1), dayOfMonth);
         dateInput.setText(dayOfMonth + "." + (month+1) + "." + year);
+        Log.i("set", date.toString());
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selectedItem = (String) parent.getItemAtPosition(position);
         if(parent.getId() == R.id.type_input){
             if(position == 0) type = "";
             else type = getTypes().get(position);
@@ -187,13 +189,15 @@ public class NewEntryActivity extends AppCompatActivity
             if(id != 0){
                 AppDatabase.getInstance(this).moneyRecordDao().update(id, date, type, category,
                         Double.parseDouble(amountInput.getText().toString()), descriptionInput.getText().toString());
+                Log.i("update", date.toString());
             }
             else {
                 MoneyRecord moneyRecord = new MoneyRecord(type, date, category,
                         Double.parseDouble(amountInput.getText().toString()), descriptionInput.getText().toString());
                 AppDatabase.getInstance(this).moneyRecordDao().add(moneyRecord);
             }
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         else {
             Toast.makeText(this, "You must enter date, type and amount.", Toast.LENGTH_LONG).show();

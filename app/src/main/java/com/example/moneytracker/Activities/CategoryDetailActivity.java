@@ -1,17 +1,15 @@
 package com.example.moneytracker.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.moneytracker.Adapters.CategoryDetailAdapter;
+import com.example.moneytracker.Adapters.MoneyRecordAdapter;
 import com.example.moneytracker.Adapters.CategoryListAdapter;
 import com.example.moneytracker.DbAndDao.AppDatabase;
 import com.example.moneytracker.Entities.Category;
@@ -20,17 +18,15 @@ import com.example.moneytracker.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class CategoryDetailActivity extends AppCompatActivity {
     public static final String EXTRA_CATEGORY_ID = "CategoryDetailActivity/EXTRA_CATEGORY_ID";
     public static final String EXTRA_MONEY_RECORD_ID = "CategoryDetailActivity/EXTRA_MONEY_RECORD_ID";
 
-    TextView categoryName, totalIncome, totalExpenses, balance;
-    ListView listView;
-    long id = 0;
+    private TextView categoryName, totalIncome, totalExpenses, balance;
+    private ListView listView;
+    private long id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +38,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
         totalExpenses = (TextView) findViewById(R.id.category_detail_expenses);
         balance = (TextView) findViewById(R.id.category_detail_balance);
         listView = (ListView) findViewById(R.id.category_detail_list);
-        setUpCategoryDetailAdapter();
+        setUpMoneyRecordAdapter();
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -84,8 +80,8 @@ public class CategoryDetailActivity extends AppCompatActivity {
     }
 
 
-    private void setUpCategoryDetailAdapter(){
-        CategoryDetailAdapter adapter = new CategoryDetailAdapter(this, getMoneyRecordList());
+    private void setUpMoneyRecordAdapter(){
+        MoneyRecordAdapter adapter = new MoneyRecordAdapter(this, getMoneyRecordList());
         adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
     }
@@ -109,7 +105,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
         super.onResume();
         Category category = AppDatabase.getInstance(this).categoryDao().getCategoryById(id);
         categoryName.setText(category.getCategoryName());
-        setUpCategoryDetailAdapter();
+        setUpMoneyRecordAdapter();
     }
 
 

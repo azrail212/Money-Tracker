@@ -3,6 +3,9 @@ package com.example.moneytracker.Activities;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -14,14 +17,15 @@ import com.example.moneytracker.Adapters.CategoryListAdapter;
 import com.example.moneytracker.DbAndDao.AppDatabase;
 import com.example.moneytracker.Entities.Category;
 import com.example.moneytracker.Entities.MoneyRecord;
+import com.example.moneytracker.Fragments.CategoriesFragment;
 import com.example.moneytracker.R;
 
 import java.util.List;
 import java.util.Objects;
 
 public class NewCategoryActivity extends AppCompatActivity {
-    EditText categoryNameInput;
-    Button deleteButton, saveButton;
+    private EditText categoryNameInput;
+    private Button deleteButton, saveButton;
     long id = 0;
 
     @Override
@@ -53,7 +57,14 @@ public class NewCategoryActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void onSave(View view){
         if(id != 0){
+            String oldName = AppDatabase.getInstance(this).categoryDao().getCategoryById(id).getCategoryName();
             AppDatabase.getInstance(this).categoryDao().update(id, categoryNameInput.getText().toString());
+            List<MoneyRecord> moneyRecords = AppDatabase.getInstance(this).moneyRecordDao().getAllFromCategory(oldName);
+            for (MoneyRecord mr : moneyRecords){
+                mr.setCategory(categoryNameInput.getText().toString());
+                AppDatabase.getInstance(this).moneyRecordDao().update(mr.getId(), mr.getDate(), mr.getType(),
+                        mr.getCategory(), mr.getAmount(), mr.getDescription());
+            }
         }
 
         else{
@@ -75,12 +86,15 @@ public class NewCategoryActivity extends AppCompatActivity {
     public void onDelete(View view){
         if(id != 0){
             List<MoneyRecord> moneyRecords = AppDatabase.getInstance(this).moneyRecordDao().getAllFromCategory(categoryNameInput.getText().toString());
-            for (MoneyRecord mr : moneyRecords)
-                mr.setCategory("Uncategorized");
+            for (MoneyRecord mr : moneyRecords){
+                mr.setCategory("");
+                AppDatabase.getInstance(this).moneyRecordDao().update(mr.getId(), mr.getDate(), mr.getType(),
+                                                                        mr.getCategory(), mr.getAmount(), mr.getDescription());
+            }
 
             AppDatabase.getInstance(this).categoryDao().delete(id);
         }
-
-        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

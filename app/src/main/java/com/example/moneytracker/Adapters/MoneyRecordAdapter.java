@@ -18,11 +18,11 @@ import com.example.moneytracker.R;
 import java.util.Calendar;
 import java.util.List;
 
-public class CategoryDetailAdapter extends BaseAdapter {
+public class MoneyRecordAdapter extends BaseAdapter {
     private Context context;
     private List<MoneyRecord> moneyRecords;
 
-    public CategoryDetailAdapter(Context context, List<MoneyRecord> moneyRecords) {
+    public MoneyRecordAdapter(Context context, List<MoneyRecord> moneyRecords) {
         this.context = context;
         this.moneyRecords = moneyRecords;
     }
