@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import com.example.moneytracker.DbAndDao.AppDatabase;
 import com.example.moneytracker.DbAndDao.UserDao;
 import com.example.moneytracker.Entities.User;
 import com.example.moneytracker.Fragments.SettingsFragment;
+import com.example.moneytracker.Helpers.CurrentUser;
 import com.example.moneytracker.R;
 
 import static com.example.moneytracker.Activities.SignUpActivity.isValidPassword;
@@ -37,7 +39,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
         AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
         UserDao userDao = appDatabase.userDao();
 
-        User user = userDao.getUserByUserName(LoginActivity.username.toString());
+        User user = userDao.getUserById(CurrentUser.getId());
+        Log.i("user", user.getName());
 
         if(!(currentPasswordText.equals(user.getPassword()))){
             Toast.makeText(getApplicationContext(),
@@ -52,7 +55,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }else {
             AppDatabase.getInstance(this).userDao().changePassword(newPasswordText, user.getUsername());
 
-            Intent saveNewPasswordIntent = new Intent(ChangePasswordActivity.this, SettingsFragment.class);
+            Intent saveNewPasswordIntent = new Intent(ChangePasswordActivity.this, MainActivity.class);
             startActivity(saveNewPasswordIntent);
             finish();
         }

@@ -34,8 +34,8 @@ public interface UserDao {
     @Query("UPDATE users SET password=:password WHERE username=:username")
     void changePassword(String password, String username);
 
-    @Query("UPDATE users SET username=:newUsername WHERE username=:username")
-    void changeUsername(String newUsername, String username);
+    @Query("UPDATE users SET name=:newName WHERE id=:id")
+    void changeName(String newName, long id);
 
     @Query("DELETE FROM users WHERE username=:username")
     void delete(String username);

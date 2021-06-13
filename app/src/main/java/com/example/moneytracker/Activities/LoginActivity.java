@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.moneytracker.DbAndDao.AppDatabase;
 import com.example.moneytracker.DbAndDao.UserDao;
 import com.example.moneytracker.Entities.User;
+import com.example.moneytracker.Helpers.CurrentUser;
 import com.example.moneytracker.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -40,30 +41,19 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
             UserDao userDao = appDatabase.userDao();
-            new Thread(() -> {
-                User user = userDao.loginUser(userNameText, passwordText);
-                if (user == null) {
-                    runOnUiThread(() -> Toast.makeText(getApplicationContext(),
-                            "Invalid credentials.", Toast.LENGTH_SHORT).show());
-                }else{
-                    Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(loginIntent);
-                    finish();
-                }
-            }).start();
+            User user = userDao.loginUser(userNameText, passwordText);
+            if (user == null) {
+                Toast.makeText(getApplicationContext(),
+                        "Invalid credentials.", Toast.LENGTH_SHORT).show();
+            }else{
+                CurrentUser.setId(AppDatabase.getInstance(this).userDao().getUserByUserName(userNameText).getId());
+                Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(loginIntent);
+                finish();
+            }
         }
-        }
-
-    private int validateInput(User user){
-        String userNameText= username.getText().toString();
-        String passwordText= password.getText().toString();
-
-        if (userNameText.isEmpty() || passwordText.isEmpty()){
-            Toast.makeText(getApplicationContext(),
-                    "Please fill all fields. ", Toast.LENGTH_SHORT).show();
-        }
-        return 0;
     }
+
 
     public void onSignUpButtonClick(View view){
         Intent intent = new Intent(this, SignUpActivity.class);

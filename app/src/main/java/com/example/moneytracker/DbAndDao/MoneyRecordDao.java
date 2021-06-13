@@ -33,4 +33,7 @@ public interface MoneyRecordDao {
 
     @Query("SELECT * FROM moneyrecords WHERE date BETWEEN :date1 AND :date2")
     List<MoneyRecord> getAllFromSpecificPeriod(Calendar date1, Calendar date2);
+
+    @Query("DELETE FROM moneyrecords")
+    void deleteAll();
 }
