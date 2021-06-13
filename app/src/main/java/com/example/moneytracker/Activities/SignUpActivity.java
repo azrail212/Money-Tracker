@@ -103,12 +103,6 @@ public class SignUpActivity extends AppCompatActivity {
         }else return 0;  // 0 stands for OK
     }
 
- /* unused method so far */
-    private void resetInput(){
-        name.getText().clear();
-        username.getText().clear();
-        password.getText().clear();
-    }
 
 
     public static boolean isValidPassword(final String password) {

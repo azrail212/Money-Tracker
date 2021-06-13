@@ -16,6 +16,7 @@ import com.example.moneytracker.R;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final int MAIN_ACTIVITY_REQUEST_CODE = 1;
     private EditText username, password;
 
 
@@ -59,7 +60,26 @@ public class LoginActivity extends AppCompatActivity {
             }).start();
         }
         }
+        
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MAIN_ACTIVITY_REQUEST_CODE) {
 
+            if (!MainActivity.AppState.getSingleInstance().isLoggingOut()) {
+                finish();
+            } else {
+                MainActivity.AppState.getSingleInstance().setLoggingOut(false);
+                super.onActivityResult(requestCode, resultCode, data);
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+    }
 
     private int validateInput(User user){
         String userNameText= username.getText().toString();

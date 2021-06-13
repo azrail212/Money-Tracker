@@ -12,6 +12,15 @@ public class User {
     private String name;
     private String username;
     private String password;
+    private boolean isLoggedIn;
+
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        isLoggedIn = loggedIn;
+    }
 
     public long getId() {
         return id;
